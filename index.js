@@ -10,26 +10,3 @@ express.urlencoded({
     extended: true, 
 })
 )
-const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'mahasiswa',
-    password: '123yanu12',
-    port: 5432,
-})
-app.get('/', (req, res, next) => {
-    console.log("TEST DATA:");
-    pool.query('select * from biodata')
-        .then(testData => {
-            console.log(testData.rows);
-            res.send(testData.rows);
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500).send('internal server error');
-        });
-})
-
-app.listen(port, () => {
-    console.log(`App running on port :${port}.`);
-})
